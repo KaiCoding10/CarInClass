@@ -13,13 +13,13 @@ class CarData:
         self.color = color
 
     def car_insert(self):
-        self.query = "INSERT INTO CARS VALUES (%S, %S, %S, %S)"
+        self.query = f"INSERT INTO cars VALUES (%s, %s, %s, %s);"
         return self.query
 
     def car_select(self):
-        self.query = "SELECT * FROM CARS"
+        self.query = "SELECT * FROM cars;"
         return self.query
 
     def car_delete(self):
-        self.query = f"DELETE FROM CARS WHERE MAKE='%S'"
+        self.query = f"DELETE FROM cars WHERE make={self.make};"
         return self.query

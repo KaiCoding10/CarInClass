@@ -10,7 +10,7 @@ def main():
 
 def sql_connect():
     try:
-        mysql_connection = MySQLConnection('127.0.0.1', 'root', 'root', 'carsinclass')
+        mysql_connection = MySQLConnection('localhost', 'root', '1234kien', 'python2')
 
         mysql_connection.connect()
 
@@ -22,10 +22,15 @@ def sql_connect():
 
 def accept_data(mysql_connection):
     cursor = mysql_connection.cursor
-    db = CarData()
-    cursor.execute(db.cars_select())
+    car = CarData()
+    cursor.execute(car.car_select())
 
     rows = cursor.fetchall()
+    print("This is the list of car from the database:\n")
+
+    if rows is None:
+        print("You have no car in the database!!!")
+
     for row in rows:
         print(row)
 
@@ -34,18 +39,19 @@ def accept_data(mysql_connection):
 
         match usr_des:
             case "Add":
-                cursor.execute(db.car_insert(), (db.make, db.model, db.year, db.color))
-                print("Successfully Added Data")
-                break
+                if car_details(car):
+                    cursor.execute(car.car_insert(), (car.make, car.model, car.year, car.color))
+                    print("Successfully Added Data")
+                    break
             case "Delete":
-                car_make = input("Enter the make of the car you want to delete")
-                cursor.execute(db.car_delete(), db.make)
+                car.make = input("Enter the make of the car you want to delete")
+                cursor.execute(car.car_delete(), car.make)
                 print("Successfully Deleted Data")
                 break
             case _:
                 print("Error, enter data again")
 
-        mysql_connection.connection.commit()
+    mysql_connection.connection.commit()
 
 
 def sql_close(mysql_connection):
@@ -58,7 +64,7 @@ def car_details(carsdata):
     year = input("Enter car year")
     color = input("Enter car color")
 
-    carsdata.car_construct(make, model, year, color)
+    carsdata.car_constructor(make, model, year, color)
 
     return True
 

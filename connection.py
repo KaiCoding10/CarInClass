@@ -1,4 +1,4 @@
-import MySQLdb
+import mysql.connector
 
 
 class MySQLConnection:
@@ -12,7 +12,7 @@ class MySQLConnection:
 
     def connect(self):
         try:
-            self.connection = MySQLdb.connect(
+            self.connection = mysql.connector.connect(
                 host=self.host,
                 user=self.user,
                 passwd=self.password,
@@ -21,7 +21,7 @@ class MySQLConnection:
             self.cursor = self.connection.cursor()
             if self.connection:
                 print("Connected to MySQL server")
-        except MySQLdb.Error as e:
+        except mysql.connector.Error as e:
             print(e)
 
     def close(self):
