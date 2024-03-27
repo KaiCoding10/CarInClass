@@ -21,5 +21,6 @@ class CarData:
         return self.query
 
     def car_delete(self):
-        self.query = f"DELETE FROM cars WHERE make={self.make};"
+        self.query = (f"DELETE FROM cars "
+                      f"WHERE make= %s;")
         return self.query

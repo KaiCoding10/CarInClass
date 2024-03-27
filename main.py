@@ -44,8 +44,8 @@ def accept_data(mysql_connection):
                     print("Successfully Added Data")
                     break
             case "Delete":
-                car.make = input("Enter the make of the car you want to delete")
-                cursor.execute(car.car_delete(), car.make)
+                # car.make = input("Enter the make of the car you want to delete")
+                cursor.execute(car.car_delete(), (car.make,))
                 print("Successfully Deleted Data")
                 break
             case _:
