@@ -35,7 +35,7 @@ def accept_data(mysql_connection):
         print(row)
 
     while True:
-        usr_des = input("Would you like to add a new car to the table or delete a car? Add or Delete")
+        usr_des = input("Would you like to add a new car to the table or delete a car? Add or Delete: ")
 
         match usr_des:
             case "Add":
@@ -44,8 +44,8 @@ def accept_data(mysql_connection):
                     print("Successfully Added Data")
                     break
             case "Delete":
-                # car.make = input("Enter the make of the car you want to delete")
-                cursor.execute(car.car_delete(), (car.make,))
+                m = input("Enter the make of the car you want to delete: ")
+                cursor.execute(car.car_delete(), (m,))
                 print("Successfully Deleted Data")
                 break
             case _:
